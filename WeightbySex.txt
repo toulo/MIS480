@@ -1,0 +1,17 @@
+ods graphics / reset width=6.4in height=4.8in imagemap;
+
+proc sort data=WORK.IMPORT out=_HeatMapTaskData;
+	by Sexx;
+run;
+
+proc sgplot data=_HeatMapTaskData;
+	by Sexx;
+	heatmap x=Diameter y=Shucked_weight / name='HeatMap';
+	gradlegend 'HeatMap';
+run;
+
+ods graphics / reset;
+
+proc datasets library=WORK noprint;
+	delete _HeatMapTaskData;
+	run;
